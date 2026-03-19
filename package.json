@@ -17,12 +17,15 @@
   "scripts": {
     "postinstall": "npm install --prefix frontend",
     "build": "npm run build --prefix frontend",
-    "start": "node index.ts"
+    "start": "node index.ts",
+    "init-db": "node data/database-init.ts"
   },
   "dependencies": {
+    "better-sqlite3": "^12.8.0",
     "express": "^5.2.1"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
     "@types/express": "^5.0.6"
   }
 }
