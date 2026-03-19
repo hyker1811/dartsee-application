@@ -1,25 +1,61 @@
-import React from "react";
-import logo from "./logo.svg";
+import {
+  BrowserRouter,
+  NavLink,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 import "./App.css";
+import GameDetailView from "./GameDetailView/GameDetailView";
+import GamePopularityStatisticsView from "./GamePopularityStatisticsView/GamePopularityStatisticsView";
+import GamesListView from "./GamesListView/GamesListView";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <header className="app-header">
+          <nav className="tab-nav" aria-label="Application views">
+            <NavLink
+              to="/games-list"
+              className={({ isActive }) =>
+                isActive ? "tab-link active" : "tab-link"
+              }
+            >
+              Games list view
+            </NavLink>
+            <NavLink
+              to="/game-detail"
+              className={({ isActive }) =>
+                isActive ? "tab-link active" : "tab-link"
+              }
+            >
+              Game detail view
+            </NavLink>
+            <NavLink
+              to="/game-popularity-statistics"
+              className={({ isActive }) =>
+                isActive ? "tab-link active" : "tab-link"
+              }
+            >
+              Game popularity statistics view
+            </NavLink>
+          </nav>
+        </header>
+
+        <main className="app-main">
+          <Routes>
+            <Route path="/" element={<Navigate to="/games-list" replace />} />
+            <Route path="/games-list" element={<GamesListView />} />
+            <Route path="/game-detail" element={<GameDetailView />} />
+            <Route
+              path="/game-popularity-statistics"
+              element={<GamePopularityStatisticsView />}
+            />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 

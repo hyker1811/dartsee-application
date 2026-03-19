@@ -1,0 +1,25 @@
+.game-detail-view {
+  max-width: 760px;
+}
+
+.game-detail-view-title {
+  margin-top: 0;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+
+.game-detail-view-description {
+  margin-bottom: 16px;
+}
+
+.game-detail-card {
+  display: inline-block;
+  border: 1px solid #ededed;
+  border-radius: 8px;
+  padding: 12px 14px;
+  background-color: #ffffff;
+}
+
+.game-detail-card p {
+  margin: 4px 0;
+}

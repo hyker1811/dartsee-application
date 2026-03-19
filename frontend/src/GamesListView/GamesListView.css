@@ -1,0 +1,18 @@
+.games-list-view {
+  max-width: 760px;
+}
+
+.games-list-view-title {
+  margin-top: 0;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+
+.games-list-view-description {
+  margin-bottom: 16px;
+}
+
+.games-list {
+  margin: 0;
+  padding-left: 20px;
+}

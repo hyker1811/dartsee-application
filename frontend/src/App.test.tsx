@@ -1,9 +1,17 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("renders tab navigation", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  expect(
+    screen.getByRole("link", { name: /games list view/i }),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole("link", { name: /game detail view/i }),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole("link", { name: /game popularity statistics view/i }),
+  ).toBeInTheDocument();
 });
