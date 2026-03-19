@@ -15,6 +15,6 @@ Node version 22.18.0 and npm version 10 or later is required to run native types
 
 ### On the database
 
-I used sqlite3 to store the data specified in the schema.sql and data.sql files. I checked in the sqlite3 database with the name "db.sqlite3" for ease of use.
+I used sqlite3 to store the data specified in the schema.sql and data.sql files into "db.sqlite3". I checked in the sqlite3 database to version control for ease of use.
 
-If you wanna reset it to the default state for testing, I left in the data.sql and schema.sql files checked in under the data/ folder and if you want to start the db from a clean slate you can run "**npm init-db**" to run those sql squeries and create a new db.
+If you want to reset it to the default state for testing, I left in the data.sql and schema.sql files checked in under the data/ folder and you can run "**npm run init-db**" to delete the old database if it exists, run those sql squeries and create a new db.

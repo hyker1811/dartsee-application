@@ -1,21 +1,33 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import { drizzle } from "drizzle-orm/better-sqlite3";
+import Database from "better-sqlite3";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-console.log("Hello, World!");
+const sqlite3db = new Database(path.join(__dirname, "data", "db.sqlite3"));
+const db = drizzle({
+  client: sqlite3db,
+});
 
+const playersTable = sqliteTable("players", {
+  id: integer("id").primaryKey(),
+  name: text("name"),
+});
+
+const result = await db.select().from(playersTable);
+
+console.log("Database connection test result:", result);
+
+// run the server
 const app = express();
-
 app.use(express.static(path.join(__dirname, "frontend", "build")));
-
 app.get("/", (req: express.Request, res: express.Response) => {
   res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
 });
-
 const port = process.env.PORT || 8080;
-
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
