@@ -2,7 +2,29 @@ import { useQuery } from "@tanstack/react-query";
 import { PieChart } from "react-minimal-pie-chart";
 import "./GamePopularityStatisticsView.css";
 
-const COLORS = ["orange", "red", "purple", "blue", "green", "violet"];
+// 20 colors should be enough
+const COLORS = [
+  "orange",
+  "red",
+  "purple",
+  "blue",
+  "green",
+  "violet",
+  "cyan",
+  "magenta",
+  "yellow",
+  "brown",
+  "gray",
+  "black",
+  "pink",
+  "teal",
+  "navy",
+  "maroon",
+  "olive",
+  "lime",
+  "aqua",
+  "silver",
+];
 
 interface GamePopularityStat {
   count: number;
@@ -44,14 +66,20 @@ function GamePopularityStatisticsView() {
       <p className="game-popularity-statistics-view-description">
         Number of games played per game type.
       </p>
-      <PieChart
-        data={chartData}
-        label={({ dataEntry }) => `${dataEntry.title} (${dataEntry.value})`}
-        labelStyle={{ fontSize: "5px", fill: "#fff" }}
-        labelPosition={70}
-        animate
-        style={{ maxWidth: "600px" }}
-      />
+      <div className="game-popularity-chart-container">
+        <PieChart data={chartData} animate style={{ maxWidth: "300px" }} />
+        <ul className="game-popularity-legend">
+          {chartData.map((entry) => (
+            <li key={entry.title} className="game-popularity-legend-item">
+              <span
+                className="game-popularity-legend-color"
+                style={{ backgroundColor: entry.color }}
+              />
+              {entry.title} ({entry.value})
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }
