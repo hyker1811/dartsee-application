@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import "./GamePopularityStatisticsView.css";
 
-// 20 colors should be enough
+// 20 colors should be enough for everyone
 const COLORS = [
   "orange",
   "red",
@@ -41,6 +42,8 @@ function GamePopularityStatisticsView() {
     },
   });
 
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   if (isLoading)
     return (
       <section className="game-popularity-statistics-view">Loading...</section>
@@ -67,10 +70,26 @@ function GamePopularityStatisticsView() {
         Number of games played per game type.
       </p>
       <div className="game-popularity-chart-container">
-        <PieChart data={chartData} animate style={{ maxWidth: "300px" }} />
+        <PieChart
+          data={chartData}
+          animate
+          style={{ maxWidth: "300px", maxHeight: "400px" }}
+          segmentsShift={(index) => (index === hoveredIndex ? 5 : 0)}
+          onMouseOver={(_, index) => setHoveredIndex(index)}
+          onMouseOut={() => setHoveredIndex(null)}
+        />
         <ul className="game-popularity-legend">
-          {chartData.map((entry) => (
-            <li key={entry.title} className="game-popularity-legend-item">
+          {chartData.map((entry, index) => (
+            <li
+              key={entry.title}
+              className={`game-popularity-legend-item${
+                index === hoveredIndex
+                  ? " game-popularity-legend-item--active"
+                  : ""
+              }`}
+              onMouseOver={() => setHoveredIndex(index)}
+              onMouseOut={() => setHoveredIndex(null)}
+            >
               <span
                 className="game-popularity-legend-color"
                 style={{ backgroundColor: entry.color }}
