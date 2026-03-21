@@ -73,6 +73,7 @@ function GamePopularityStatisticsView() {
         <PieChart
           data={chartData}
           animate
+          radius={42}
           style={{ maxWidth: "300px", maxHeight: "400px" }}
           segmentsShift={(index) => (index === hoveredIndex ? 5 : 0)}
           onMouseOver={(_, index) => setHoveredIndex(index)}
