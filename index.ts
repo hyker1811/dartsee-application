@@ -1,10 +1,10 @@
+import Database from "better-sqlite3";
+import { count, eq } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/better-sqlite3";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { drizzle } from "drizzle-orm/better-sqlite3";
-import Database from "better-sqlite3";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { eq } from "drizzle-orm";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -199,6 +199,18 @@ app.get(
         };
       }),
     });
+  },
+);
+
+app.get(
+  "/api/game-popularity-statistics",
+  async (req: express.Request, res: express.Response) => {
+    const gamesCount = await db
+      .select({ count: count(), type: gamesTable.type })
+      .from(gamesTable)
+      .groupBy(gamesTable.type);
+
+    res.json(gamesCount);
   },
 );
 
