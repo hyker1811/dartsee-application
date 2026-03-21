@@ -25,7 +25,7 @@ app.get("/api/test", (req: express.Request, res: express.Response) => {
   res.json({ message: "Test endpoint is working!" });
 });
 
-app.get("/", (req: express.Request, res: express.Response) => {
+app.get("*path", (req: express.Request, res: express.Response) => {
   res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
 });
 
