@@ -61,6 +61,8 @@ function GamePopularityStatisticsView() {
     color: COLORS[index % COLORS.length],
   }));
 
+  const total = chartData.reduce((sum, entry) => sum + entry.value, 0);
+
   return (
     <section className="game-popularity-statistics-view">
       <h2 className="game-popularity-statistics-view-title">
@@ -78,6 +80,8 @@ function GamePopularityStatisticsView() {
           segmentsShift={(index) => (index === hoveredIndex ? 5 : 0)}
           onMouseOver={(_, index) => setHoveredIndex(index)}
           onMouseOut={() => setHoveredIndex(null)}
+          labelStyle={{ fontSize: "5px", fill: "#fff", fontWeight: 600 }}
+          labelPosition={70}
         />
         <ul className="game-popularity-legend">
           {chartData.map((entry, index) => (
@@ -95,7 +99,8 @@ function GamePopularityStatisticsView() {
                 className="game-popularity-legend-color"
                 style={{ backgroundColor: entry.color }}
               />
-              {entry.title} ({entry.value})
+              {entry.title} ({entry.value} &mdash;{" "}
+              {total > 0 ? Math.round((entry.value / total) * 100) : 0}%)
             </li>
           ))}
         </ul>
