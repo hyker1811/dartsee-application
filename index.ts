@@ -180,6 +180,11 @@ app.get(
           playerRoundAverages.push(roundAverage);
         }
 
+        const missCount = playerThrows.filter(
+          (throwData) =>
+            throwData.modifier === 0 || throwData.modifier === null,
+        ).length;
+
         const averageScore =
           playerRoundAverages.reduce(
             (sum, playerRoundAverage) => sum + playerRoundAverage,
@@ -190,6 +195,7 @@ app.get(
           id: player.players.id,
           name: player.players.name,
           averageScore,
+          missCount,
         };
       }),
     });

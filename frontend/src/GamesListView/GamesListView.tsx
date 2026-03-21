@@ -14,6 +14,7 @@ interface GameDetail {
     id: string;
     name: string;
     averageScore: number;
+    missCount: number;
   }>;
 }
 
@@ -46,7 +47,7 @@ function GameDetailPanel({ gameId }: { gameId: number }) {
             {data.players.map((player) => (
               <li key={player.id}>
                 {player.name ?? player.id} - Average Score per round:{" "}
-                {player.averageScore.toFixed(3)}
+                {player.averageScore.toFixed(3)} - Misses: {player.missCount}
               </li>
             ))}
           </ul>
