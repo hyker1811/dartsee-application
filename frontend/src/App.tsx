@@ -7,7 +7,6 @@ import {
   Routes,
 } from "react-router-dom";
 import "./App.css";
-import GameDetailView from "./GameDetailView/GameDetailView";
 import GamePopularityStatisticsView from "./GamePopularityStatisticsView/GamePopularityStatisticsView";
 import GamesListView from "./GamesListView/GamesListView";
 
@@ -29,14 +28,6 @@ function App() {
                 Games list view
               </NavLink>
               <NavLink
-                to="/game-detail"
-                className={({ isActive }) =>
-                  isActive ? "tab-link active" : "tab-link"
-                }
-              >
-                Game detail view
-              </NavLink>
-              <NavLink
                 to="/game-popularity-statistics"
                 className={({ isActive }) =>
                   isActive ? "tab-link active" : "tab-link"
@@ -51,7 +42,6 @@ function App() {
             <Routes>
               <Route path="/" element={<Navigate to="/games-list" replace />} />
               <Route path="/games-list" element={<GamesListView />} />
-              <Route path="/game-detail" element={<GameDetailView />} />
               <Route
                 path="/game-popularity-statistics"
                 element={<GamePopularityStatisticsView />}

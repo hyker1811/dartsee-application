@@ -3,11 +3,11 @@ import "./GamesListView.css";
 
 function GamesListView() {
   const { data, isLoading, error } = useQuery({
-    queryKey: ["test"],
+    queryKey: ["gamesList"],
     queryFn: async () => {
-      const response = await fetch("/api/test");
+      const response = await fetch("/api/games-list");
       if (!response.ok) {
-        throw new Error("Failed to fetch test data");
+        throw new Error("Failed to fetch games list");
       }
       return response.json();
     },
@@ -22,7 +22,7 @@ function GamesListView() {
 
   return (
     <section className="games-list-view">
-      <p>{data?.message}</p>
+      <p>{data}</p>
     </section>
   );
 }
