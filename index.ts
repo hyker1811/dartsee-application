@@ -106,25 +106,93 @@ app.get(
   "/api/games-list",
   async (req: express.Request, res: express.Response) => {
     const games = await db.select().from(gamesTable);
-    const result = [];
-    for (const game of games) {
-      const players = await db
-        .select()
-        .from(gamePlayersTable)
-        .where(eq(gamePlayersTable.game_id, game.id))
-        .innerJoin(
-          playersTable,
-          eq(gamePlayersTable.player_id, playersTable.id),
-        );
+    // const result = [];
+    // for (const game of games) {
+    //   const players = await db
+    //     .select()
+    //     .from(gamePlayersTable)
+    //     .where(eq(gamePlayersTable.game_id, game.id))
+    //     .innerJoin(
+    //       playersTable,
+    //       eq(gamePlayersTable.player_id, playersTable.id),
+    //     );
 
-      result.push({
-        id: game.id,
-        type: game.type,
-        players: players.map((p) => p.players.name),
-      });
+    //   result.push({
+    //     id: game.id,
+    //     type: game.type,
+    //     players: players.map((p) => p.players.name),
+    //   });
+    // }
+
+    res.json(games);
+  },
+);
+
+app.get(
+  "/api/games-detail/:gameId",
+  async (req: express.Request, res: express.Response) => {
+    const gameId =
+      typeof req.params.gameId === "string"
+        ? parseInt(req.params.gameId)
+        : null;
+    if (gameId === null || isNaN(gameId)) {
+      res.status(400).json({ error: "Invalid game ID" });
+      return;
     }
 
-    res.json(JSON.stringify(result));
+    const game = (
+      await db.select().from(gamesTable).where(eq(gamesTable.id, gameId))
+    )[0];
+
+    if (!game) {
+      res.status(404).json({ error: "Game not found" });
+      return;
+    }
+
+    const players = await db
+      .select()
+      .from(gamePlayersTable)
+      .where(eq(gamePlayersTable.game_id, gameId))
+      .innerJoin(playersTable, eq(gamePlayersTable.player_id, playersTable.id));
+
+    const throws = await db
+      .select()
+      .from(throwsTable)
+      .where(eq(throwsTable.game_id, gameId));
+
+    res.json({
+      id: game.id,
+      type: game.type,
+      players: players.map((player) => {
+        const playerThrows = throws.filter(
+          (throwData) => throwData.player_id === player.players.id,
+        );
+
+        const playerRoundAverages: number[] = [];
+        for (let i = 0; i < playerThrows.length; i += 3) {
+          const roundThrows = playerThrows.slice(i, i + 3); // if we slice outside of bounds, it will just return the remaining items, so no need to check if there are 3 throws
+          const roundAverage =
+            roundThrows.reduce(
+              (sum, throwData) =>
+                sum + (throwData.score ?? 0) * (throwData.modifier ?? 0),
+              0,
+            ) / (roundThrows.length || 1);
+          playerRoundAverages.push(roundAverage);
+        }
+
+        const averageScore =
+          playerRoundAverages.reduce(
+            (sum, playerRoundAverage) => sum + playerRoundAverage,
+            0,
+          ) / (playerRoundAverages.length || 1);
+
+        return {
+          id: player.players.id,
+          name: player.players.name,
+          averageScore,
+        };
+      }),
+    });
   },
 );
 

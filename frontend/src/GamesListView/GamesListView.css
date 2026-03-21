@@ -14,5 +14,107 @@
 
 .games-list {
   margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.game-row-container {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.game-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 16px;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+  gap: 12px;
+  transition: background-color 0.15s;
+}
+
+.game-row:hover {
+  background-color: #f5f5f5;
+}
+
+.game-row-expanded {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ddd;
+}
+
+.game-row-id {
+  font-weight: 600;
+  color: #555;
+  min-width: 60px;
+}
+
+.game-row-type {
+  flex: 1;
+  text-transform: capitalize;
+}
+
+.game-row-chevron {
+  color: #999;
+  font-size: 12px;
+}
+
+.game-detail-panel {
+  padding: 16px;
+  background: #fafafa;
+}
+
+.game-detail-section {
+  margin-bottom: 12px;
+}
+
+.game-detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.game-detail-section h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.game-detail-empty {
+  margin: 0;
+  color: #999;
+  font-size: 13px;
+}
+
+.game-detail-players {
+  margin: 0;
   padding-left: 20px;
+}
+
+.game-detail-players li {
+  margin-bottom: 2px;
+}
+
+.game-detail-throws-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.game-detail-throws-table th,
+.game-detail-throws-table td {
+  padding: 6px 8px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.game-detail-throws-table th {
+  font-weight: 600;
+  color: #555;
+  background: #f0f0f0;
 }
