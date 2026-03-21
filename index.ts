@@ -17,16 +17,18 @@ const playersTable = sqliteTable("players", {
   name: text("name"),
 });
 
-const result = await db.select().from(playersTable);
-
-console.log("Database connection test result:", result);
-
 // run the server
 const app = express();
 app.use(express.static(path.join(__dirname, "frontend", "build")));
+
+app.get("/api/test", (req: express.Request, res: express.Response) => {
+  res.json({ message: "Test endpoint is working!" });
+});
+
 app.get("/", (req: express.Request, res: express.Response) => {
   res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
 });
+
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
