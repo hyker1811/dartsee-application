@@ -12,6 +12,7 @@
     "@types/node": "^16.18.126",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "heatmap.js": "^2.0.5",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-minimal-pie-chart": "^9.1.2",
@@ -43,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/heatmap.js": "^2.0.41"
   }
 }

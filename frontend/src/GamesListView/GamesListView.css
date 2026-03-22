@@ -1,5 +1,5 @@
 .games-list-view {
-  max-width: 760px;
+  max-width: 860px;
 }
 
 .games-list-view-title {
@@ -98,6 +98,89 @@
 
 .game-detail-players li {
   margin-bottom: 2px;
+}
+
+.game-heatmap-wrapper {
+  width: 100%;
+  max-width: 800px;
+}
+
+.game-heatmap {
+  position: relative;
+  overflow: hidden;
+  width: 800px;
+  height: 800px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.game-heatmap::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #666;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.game-heatmap::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+  background:
+    repeating-conic-gradient(
+      from -9deg,
+      rgba(90, 90, 90, 0.42) 0deg 0.7deg,
+      transparent 0.7deg 18deg
+    ),
+    radial-gradient(
+      circle at center,
+      rgba(90, 90, 90, 0.2) 0 12px,
+      rgba(90, 90, 90, 0.7) 12px 13px,
+      transparent 13px 30px,
+      rgba(90, 90, 90, 0.7) 30px 31px,
+      transparent 31px 180px,
+      rgba(90, 90, 90, 0.65) 180px 182px,
+      transparent 182px 210px,
+      rgba(90, 90, 90, 0.65) 210px 212px,
+      transparent 212px 280px,
+      rgba(90, 90, 90, 0.7) 280px 282px,
+      transparent 282px 299px,
+      rgba(90, 90, 90, 0.7) 299px 300px,
+      transparent 300px
+    );
+}
+
+.game-heatmap-numbers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.game-heatmap-number {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  text-shadow:
+    0 0 2px #fff,
+    0 0 4px #fff;
 }
 
 .game-detail-throws-table {

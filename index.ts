@@ -163,6 +163,14 @@ app.get(
     res.json({
       id: game.id,
       type: game.type,
+      throws: throws.map((throwData) => ({
+        id: throwData.id,
+        playerId: throwData.player_id,
+        score: throwData.score,
+        modifier: throwData.modifier,
+        x: throwData.x,
+        y: throwData.y,
+      })),
       players: players.map((player) => {
         const playerThrows = throws.filter(
           (throwData) => throwData.player_id === player.players.id,
