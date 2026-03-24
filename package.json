@@ -18,7 +18,8 @@
     "postinstall": "npm install --prefix frontend",
     "build": "npm run build --prefix frontend",
     "start": "node index.ts",
-    "init-db": "node data/database-init.ts"
+    "init-db-linux": "node data/database-init.ts",
+    "init-db-windows": "node data\\database-init.ts"
   },
   "dependencies": {
     "better-sqlite3": "^12.8.0",

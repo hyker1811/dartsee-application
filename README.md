@@ -4,17 +4,22 @@ Node version 22.18.0 and npm version 10 or later is required to run native types
 
 ### Setup
 
-1. "**npm install**" - Install the backend packages (root directory) and the frontend packages (frontend folder).
-2. "**npm run build**" - Builds the react app. This will be served by the server later.
+1. Clone the repository. I only tested it on a linux system, but it should work on a windows system as well, since only node and npm commands are used in the package.json scripts.
+2. "**npm install**" - This installs the backend packages (root directory) and the frontend packages (frontend folder).
+3. "**npm run build**" - Builds the react app. This will be served by the server later.
 
 ### Running
 
 "**npm start**" - Run the server. It will serve the built react app on port number "8080" by default.
 
-**NOTE**: If the port number doesn't work or is unavailable, run it with "**PORT=freeportnumber npm start**" with a free port number, for example: "**PORT=2600 npm start**".
+**NOTE**: If the port number doesn't work or is unavailable, run it with "**PORT=freeportnumber npm start**" with a free port number, for example: "**PORT=2600 npm start**", since the app fetches the port number from the environment.
+
+### The bonus task
+
+The bonus task I implemented is showing a heatmap of the throws of a game under the game details. If it says "No throw coordinates available", (such as with game #4) then that game has no throws to show. Make sure to check out a game with throws to see this feature.
 
 ### On the database
 
 I used sqlite3 to store the data specified in the schema.sql and data.sql files into "db.sqlite3". I checked in the sqlite3 database to version control for ease of use.
 
-If you want to reset it to the default state for testing, I left in the data.sql and schema.sql files checked in under the data/ folder and you can run "**npm run init-db**" to delete the old database if it exists, run those sql squeries and create a new db.
+If you want to reset it to the default state for testing, I left in the data.sql and schema.sql files checked in under the data/ folder and you can run "**npm run init-db-linux**" on POSIX systems (linux/macOS) or "**npm run init-db-windows**" on windows to delete the old database if it exists, run those sql squeries and create a new db.
